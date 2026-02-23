@@ -1,0 +1,43 @@
+version: 2
+updates:
+  # 1. DOCKER (Infraestrutura)
+  - package-ecosystem: "docker"
+    directory: "/dadlandinfra"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    target-branch: "develop"
+    reviewers:
+      - "Teralince" 
+    commit-message:
+      prefix: "deps(infra)"
+
+  # 2. NPM (Frontend)
+  - package-ecosystem: "npm"
+    directory: "/dadlandfrontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    target-branch: "develop"
+    reviewers:
+      - "Teralince"
+    commit-message:
+      prefix: "deps(frontend)"
+
+  # 3. PIP (Backend)
+  - package-ecosystem: "pip"
+    directory: "/dadlandbackend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    target-branch: "develop"
+    reviewers:
+      - "Teralince"
+    commit-message:
+      prefix: "deps(backend)" 

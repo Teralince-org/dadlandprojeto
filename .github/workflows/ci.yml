@@ -1,0 +1,61 @@
+name: CI Pipeline - Repositório Único
+
+# 1. TRIGGERS (Quando o robô deve rodar)
+on:
+  push:
+    branches: [ "main", "staging", "develop" ]
+  pull_request:
+    branches: [ "main", "staging", "develop" ]
+
+# 2. JOBS (As tarefas que rodam em paralelo)
+jobs:
+  # --- VALIDAÇÃO DO BACKEND ---
+  backend-lint-and-test:
+    name: Backend (Python)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./dadlandbackend # Entra na pasta do backend
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' # Ajuste se estiver usando outra versão
+
+      - name: Instalar dependências de Lint
+        run: |
+          python -m pip install --upgrade pip
+          pip install black flake8
+
+      - name: Rodar Black (Formatação)
+        run: black --check .
+
+      - name: Rodar Flake8 (Qualidade do Código)
+        run: flake8 .
+
+  # --- VALIDAÇÃO DO FRONTEND ---
+  frontend-lint-and-test:
+    name: Frontend (Node.js)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./dadlandfrontend # Entra na pasta do frontend
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Ajuste se estiver usando outra versão
+
+      - name: Instalar dependências (npm install)
+        run: npm ci # 'npm ci' é mais rápido e seguro para pipelines que o 'npm install'
+
+      - name: Rodar Testes (Jest)
+        run: npm test -- --watchAll=false
