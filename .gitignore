@@ -22,6 +22,7 @@ Thumbs.db
 .env.production.local
 *.env
 *.env.*
+!.env.example
 
 # ------------------------------------------------------------------------------
 # BACKEND (PYTHON / DJANGO)
