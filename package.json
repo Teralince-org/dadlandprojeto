@@ -7,7 +7,7 @@
   "lint-staged": {
     "dadlandbackend/**/*.py": [
       "dadlandbackend/venv/bin/black",
-      "dadlandbackend/venv/bin/flake8"
+      "dadlandbackend/venv/bin/flake8 --config=dadlandbackend/.flake8"
     ],
     "dadlandfrontend/**/*.{js,jsx,ts,tsx}": [
       "npm test --prefix dadlandfrontend -- --watchAll=false --bail --findRelatedTests --passWithNoTests"
