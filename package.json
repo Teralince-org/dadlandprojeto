@@ -10,7 +10,7 @@
       "dadlandbackend/venv/bin/flake8"
     ],
     "dadlandfrontend/**/*.{js,jsx,ts,tsx}": [
-      "npm test --prefix dadlandfrontend -- --watchAll=false --bail --findRelatedTests"
+      "npm test --prefix dadlandfrontend -- --watchAll=false --bail --findRelatedTests --passWithNoTests"
     ]
   },
   "devDependencies": {
