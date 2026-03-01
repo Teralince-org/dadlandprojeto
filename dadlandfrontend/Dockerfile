@@ -1,5 +1,5 @@
 # 1. Imagem base do Node.js
-FROM node:20-slim
+FROM node:20.20.0-slim
 
 # 2. Define o diretório de trabalho
 WORKDIR /app

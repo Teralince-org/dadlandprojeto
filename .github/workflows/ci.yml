@@ -24,7 +24,7 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12' # Ajuste se estiver usando outra versão
+          python-version-file: 'dadlandbackend/.python-version'
 
       - name: Instalar dependências de Lint
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Ajuste se estiver usando outra versão
+          node-version-file: '.nvmrc'
 
       - name: Instalar dependências (npm install)
         run: npm ci # 'npm ci' é mais rápido e seguro para pipelines que o 'npm install'
