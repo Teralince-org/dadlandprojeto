@@ -4,6 +4,7 @@ services:
   # 1. O serviço do Backend (Django)
   backend:
     build: ../dadlandbackend # Caminho relativo para subir um nível e entrar no backend
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       # Mapeia a porta 8000
       - "8000:8000"
@@ -29,6 +30,8 @@ services:
       - ../dadlandfrontend:/app # Permite o hot-reload
     env_file:
       - .env
+    environment:
+      - INTERNAL_BACKEND_URL=http://backend:8000
     networks:
       - dadland-network
     depends_on:
