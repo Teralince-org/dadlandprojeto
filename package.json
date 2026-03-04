@@ -6,11 +6,11 @@
   },
   "lint-staged": {
     "dadlandbackend/**/*.py": [
-      "bash -c 'cd dadlandbackend && ./venv/bin/black .'",
-      "bash -c 'cd dadlandbackend && ./venv/bin/flake8 .'"
+      "dadlandbackend/venv/bin/black",
+      "dadlandbackend/venv/bin/flake8 --config=dadlandbackend/.flake8"
     ],
     "dadlandfrontend/**/*.{js,jsx,ts,tsx}": [
-      "bash -c 'cd dadlandfrontend && npm test -- --watchAll=false --findRelatedTests --bail'"
+      "npm test --prefix dadlandfrontend -- --watchAll=false --bail --findRelatedTests --passWithNoTests"
     ]
   },
   "devDependencies": {
