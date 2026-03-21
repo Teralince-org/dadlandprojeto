@@ -4,7 +4,7 @@ services:
   # 1. O serviço do Backend (Django)
   backend:
     build: ../dadlandbackend # Caminho relativo para subir um nível e entrar no backend
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     ports:
       # Mapeia a porta 8000
       - "8000:8000"
