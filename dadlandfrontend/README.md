@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚛️ Guia do Frontend (Next.js)
 
-## Getting Started
+Este diretório contém a camada de apresentação do projeto Dadland, baseada no Next.js (App Router).
 
-First, run the development server:
+## Tecnologias e Frameworks
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16+:** Framework React para construção da aplicação, roteamento (App Router) e renderização na nuvem (Server-Side) / cliente (Client-Side).
+- **React 19+:** Biblioteca componentizada de construção de interfaces.
+- **Tailwind CSS v4:** Framework CSS utilitário integrado via PostCSS.
+- **TypeScript:** Para consistência, tipagem estática do código e DX fluida.
+- **Jest & React Testing Library:** Suítes combinadas focadas na validação unitária.
+- **ESLint:** Linter para uniformizar a padronização e prevenir defeitos críticos.
+
+## Estrutura de Pastas de Desenvolvimento
+
+A organização aderida respeita os conceitos do Next.js moderno:
+
+```text
+dadlandfrontend/
+├── app/               # Rotas, diretórios aninhados, layouts principais e páginas construídas do software
+├── public/            # Assets estáticos servidos no root da aplicação (fonts, svg, imagens)
+├── __tests__/         # Agrupador rigoroso de todos os testes unitários do projeto (Jest)
+├── package.json       # Manifesto de pacote e bibliotecas contendo também os scripts do dev
+├── eslint.config.mjs  # Aterramento das checagens do Linter
+├── postcss.config.mjs # Processamento do Tailwind via CLI
+└── tsconfig.json      # As regras imperativas de uso do TypeScript Server
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Comandos Essenciais do `package.json`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Ainda que o ciclo de build local completo possa ser executado puramente pelo Docker Compose de forma unificada, possuímos os atalhos disponíveis localmente que você usará com frequência na plataforma se necessitar rodar pontualmente do seu computador:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **`npm run dev`**: Inicializa o servidor localmente habilitando o Live Reload no `localhost:3000`.
+- **`npm run lint`**: Analisador estático contra a formatação nativa para identificar deslizes.
+- **`npm run test`**: Ativa a suíte `jest` de ponta a ponta informando se ocorreu quebra de código nos seus testes.
+- **`npm run test:watch`**: Aciona os testes interativos para quem opta por práticas com o código espelhando e recarregando os testes.
 
-## Learn More
+## ⚠️ A Importância do `npm install` Local (Estando com o Docker Ligado)
 
-To learn more about Next.js, take a look at the following resources:
+A infraestrutura roda magicamente com o `docker compose up --build` – ele instalará o script todo debaixo d'agua do contêiner, e então construirá o localhost, mas:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**É MANDATÓRIO executar o comando `npm install` da sua máquina de desenvolvedor no diretório de trabalho `dadlandfrontend/` e na raiz do projeto.**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Isso ocorre porque sua **IDE (VSCode, WebStorm, etc)** está instalada _na sua máquina (host)_ e precisa entender ativamente para onde os objetos da API são construídos e o suporte nativo.
+Com o npm install executado visualmente na raiz do frontend, os seguintes suportes fluirão naturalmente:
+1. O Linter base da IDE reconhecerá a árvore de caminhos reportando problemas antes mesmo do build explodir;
+2. As extensões oficiais como o de Tailwind Intellisense começarão a trabalhar autocompletando cores ou responsividade de forma contínua;
+3. O autocompletar e o formatador centralizado da equipe (Prettier/ESLint) trabalhará com assertividade e você não ficará parando para observar logs de imports falhos.
